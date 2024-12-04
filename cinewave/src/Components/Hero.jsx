@@ -1,0 +1,32 @@
+import React from 'react';
+
+const Hero = () => {
+  return (
+    <section style={styles.hero}>
+      <div style={styles.overlay}>
+        <h1>Welcome to MyMovieApp</h1>
+        <p>Discover your next favorite movie!</p>
+      </div>
+    </section>
+  );
+};
+
+const styles = {
+  hero: {
+    height: '300px',
+    backgroundImage: 'url("https://via.placeholder.com/1920x300")', // Replace with a dynamic URL if needed
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    position: 'relative',
+    color: 'white',
+  },
+  overlay: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    textAlign: 'center',
+  },
+};
+
+export default Hero;
