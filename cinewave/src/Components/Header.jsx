@@ -3,7 +3,7 @@ import React from 'react';
 const Header = () => {
   return (
     <header style={styles.header}>
-      <div style={styles.logo}>MyMovieApp</div>
+      <div style={styles.logo}>Cinewave</div>
       <div>
         <button style={styles.button}>Login</button>
         <button style={{ ...styles.button, marginLeft: '10px' }}>Register</button>

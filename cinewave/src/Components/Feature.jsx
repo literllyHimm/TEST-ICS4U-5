@@ -15,7 +15,7 @@ const Feature = () => {
             api_key: API_KEY,
           },
         });
-        const randomMovies = response.data.results.sort(() => 0.5 - Math.random()).slice(0, 3);
+        const randomMovies = response.data.results.sort(() => 0.5 - Math.random()).slice(0, 10);
         setMovies(randomMovies);
       } catch (error) {
         console.error('Error fetching now playing movies:', error);
