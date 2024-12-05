@@ -10,7 +10,6 @@ const RegisterView = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle register logic here
     if (password !== rePassword) {
       alert("Passwords don't match!");
       return;

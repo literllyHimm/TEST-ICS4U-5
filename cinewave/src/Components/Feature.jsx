@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../styles/Feature.css';
 
 const Feature = () => {
   const [movies, setMovies] = useState([]);
+  
+  const NUM_RANDOM_MOVIES = 8;
 
   useEffect(() => {
     fetchMovies();
   }, []);
 
-  // Fetch movies based on now playing
   const fetchMovies = async () => {
     const API_KEY = "9e9ae8b4151b5a20e5c95911ff07c4e4";
     const BASE_URL = "https://api.themoviedb.org/3/movie/now_playing";
@@ -19,21 +20,28 @@ const Feature = () => {
       const response = await axios.get(BASE_URL, {
         params: { api_key: API_KEY },
       });
-      const shuffledMovies = shuffleArray(response.data.results); // Shuffle the movies after fetching
-      setMovies(shuffledMovies);
+      
+      const randomMovies = getRandomMovies(response.data.results);
+      setMovies(randomMovies);
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
   };
 
-  // Fisher-Yates Shuffle algorithm to randomize the array
-  const shuffleArray = (array) => {
-    let shuffledArray = [...array]; // Create a copy of the array to avoid mutating the original
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; // Swap elements
+  // Function to get random movies
+  const getRandomMovies = (moviesArray) => {
+    const randomMovies = [];
+    const selectedIndexes = new Set();
+
+    while (randomMovies.length < NUM_RANDOM_MOVIES && selectedIndexes.size < moviesArray.length) {
+      const randomIndex = Math.floor(Math.random() * moviesArray.length);
+      if (!selectedIndexes.has(randomIndex)) {
+        randomMovies.push(moviesArray[randomIndex]);
+        selectedIndexes.add(randomIndex);
+      }
     }
-    return shuffledArray;
+
+    return randomMovies;
   };
 
   return (

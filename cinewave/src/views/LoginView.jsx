@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { useNavigate } from 'react-router-dom'; 
 import '../styles/LoginView.css';
 
 const LoginView = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate(); 
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault(); 
 
-    // Example validation (You can replace this with real validation)
+    
     if (email === 'Arjunkotwal@gmail.com' && password === 'password123') {
-      // Redirect to home page if credentials are correct
       navigate('/');
     } else {
-      // Optionally show an error message
+
       alert('Invalid credentials, please try again.');
     }
   };
