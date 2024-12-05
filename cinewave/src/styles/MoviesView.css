@@ -6,7 +6,7 @@
   .genres-container {
     flex: 1;  /* Left sidebar takes 1 part of the screen */
     padding: 10px;
-    border-right: 2px solid #000000;
+    border-right: 2px solid #131212;
     height: 100vh; /* Full height to keep genres visible on the side */
     overflow-y: auto;
   }

@@ -52,26 +52,39 @@ const MovieDetailsView = () => {
             className="movie-poster"
           />
           <p>{movie.overview}</p>
-          <h3>Release Date: {movie.release_date}</h3>
-          <h3>Rating: {movie.vote_average}</h3>
+
+          <div className="info-box">
+            <h3>Release Date:</h3>
+            <p>{movie.release_date}</p>
+            <h3>Rating:</h3>
+            <p>{movie.vote_average}</p>
+            <h3>Runtime:</h3>
+            <p>{movie.runtime} minutes</p>
+            <h3>Language:</h3>
+            <p>{movie.original_language}</p>
+            <h3>Budget:</h3>
+            <p>${movie.budget.toLocaleString()}</p>
+          </div>
+
+          {trailer && trailer.key && (
+            <div className="trailer">
+              <h3>Watch the Trailer:</h3>
+              <iframe
+                width="100%"
+                height="450"
+                src={`https://www.youtube.com/embed/${trailer.key}`}
+                title="Movie Trailer"
+                frameBorder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )}
         </>
-      )}
-      {trailer && trailer.key && (
-        <div className="trailer">
-          <h3>Watch the Trailer:</h3>
-          <iframe
-            width="100%"
-            height="400"
-            src={`https://www.youtube.com/embed/${trailer.key}`}
-            title="Movie Trailer"
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </div>
       )}
     </div>
   );
 };
 
-export default MovieDetailsView;
+export default MovieDetailsView
+
