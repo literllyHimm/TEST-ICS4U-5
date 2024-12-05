@@ -1,58 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import '../styles/GenresPage.css';
 
 const GenresPage = () => {
-  const genresList = [
-    { genre: 'Action', id: 28 },
-    { genre: 'Adventure', id: 12 },
-    { genre: 'Animation', id: 16 },
-    { genre: 'Comedy', id: 35 },
-    { genre: 'Crime', id: 80 },
-    { genre: 'Documentary', id: 99 },
-    { genre: 'Drama', id: 18 },
-    { genre: 'Family', id: 10751 },
-    { genre: 'Fantasy', id: 14 },
-    { genre: 'History', id: 36 },
-  ];
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    fetchGenres();
+  }, []);
+
+  const fetchGenres = async () => {
+    const API_KEY = "9e9ae8b4151b5a20e5c95911ff07c4e4";
+    const BASE_URL = "https://api.themoviedb.org/3/genre/movie/list";
+
+    try {
+      const response = await axios.get(BASE_URL, {
+        params: { api_key: API_KEY },
+      });
+      setGenres(response.data.genres);
+    } catch (error) {
+      console.error("Error fetching genres:", error);
+    }
+  };
 
   return (
-    <div style={styles.pageContainer}>
-      <h2>Genres</h2>
-      <div style={styles.buttonContainer}>
-        {genresList.map((genre) => (
-          <Link to={`/movies?genre=${genre.id}`} key={genre.id}>
-            <button style={styles.button}>
-              {genre.genre}
-            </button>
+    <div className="genres-page">
+      <h2>Select a Genre</h2>
+      <div className="genre-list">
+        {genres.map((genre) => (
+          <Link
+            key={genre.id}
+            to={`/movies?genre=${genre.id}`}
+            className="genre-card"
+          >
+            <h3>{genre.name}</h3>
           </Link>
         ))}
       </div>
     </div>
   );
-};
-
-const styles = {
-  pageContainer: {
-    textAlign: 'center',
-    marginTop: '20px',
-    backgroundColor: 'white',
-    padding: '20px',
-  },
-  buttonContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '10px',
-    justifyContent: 'center',
-    marginTop: '20px',
-  },
-  button: {
-    padding: '10px 20px',
-    backgroundColor: '#007BFF',
-    color: 'white',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-  },
 };
 
 export default GenresPage;

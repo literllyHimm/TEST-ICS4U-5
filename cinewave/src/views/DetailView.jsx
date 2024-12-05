@@ -1,82 +1,77 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import '../styles/DetailView.css';
 
-const DetailView = () => {
-  const { id } = useParams();
+const MovieDetailsView = () => {
   const [movie, setMovie] = useState(null);
-  const [trailers, setTrailers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [trailer, setTrailer] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
-    fetchMovieDetails(id);
+    fetchMovieDetails();
+    fetchMovieTrailer();
   }, [id]);
 
-  const fetchMovieDetails = async (id) => {
-    const API_KEY = '9e9ae8b4151b5a20e5c95911ff07c4e4';
+  const fetchMovieDetails = async () => {
+    const API_KEY = "9e9ae8b4151b5a20e5c95911ff07c4e4";
     const BASE_URL = `https://api.themoviedb.org/3/movie/${id}`;
-    const TRAILER_URL = `https://api.themoviedb.org/3/movie/${id}/videos`;
 
     try {
-      const movieResponse = await axios.get(BASE_URL, {
+      const response = await axios.get(BASE_URL, {
         params: { api_key: API_KEY },
       });
-      setMovie(movieResponse.data);
-
-      const trailerResponse = await axios.get(TRAILER_URL, {
-        params: { api_key: API_KEY },
-      });
-      setTrailers(trailerResponse.data.results);
-    } catch (err) {
-      setError('Failed to fetch movie details. Please try again.');
-    } finally {
-      setIsLoading(false);
+      setMovie(response.data);
+    } catch (error) {
+      console.error('Error fetching movie details:', error);
     }
   };
 
-  if (isLoading) return <p>Loading movie details...</p>;
+  const fetchMovieTrailer = async () => {
+    const API_KEY = "9e9ae8b4151b5a20e5c95911ff07c4e4";
+    const BASE_URL = `https://api.themoviedb.org/3/movie/${id}/videos`;
+
+    try {
+      const response = await axios.get(BASE_URL, {
+        params: { api_key: API_KEY },
+      });
+      setTrailer(response.data.results[0]);
+    } catch (error) {
+      console.error('Error fetching movie trailer:', error);
+    }
+  };
 
   return (
-    <div style={styles.container}>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="movie-details-view">
       {movie && (
-        <div style={styles.detailsContainer}>
+        <>
           <h2>{movie.title}</h2>
-          <p><strong>Release Date:</strong> {movie.release_date}</p>
-          <p><strong>Overview:</strong> {movie.overview}</p>
-          <p><strong>Vote Average:</strong> {movie.vote_average}</p>
-          <p><strong>Genres:</strong> {movie.genres.map(genre => genre.name).join(', ')}</p>
-          <p><strong>Language:</strong> {movie.original_language}</p>
-          
-          <h3>Trailer</h3>
-          {trailers.length > 0 ? (
-            <iframe
-              width="560"
-              height="315"
-              src={`https://www.youtube.com/embed/${trailers[0].key}`}
-              title="Movie Trailer"
-              allowFullScreen
-            />
-          ) : (
-            <p>No trailers available.</p>
-          )}
+          <img
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
+            className="movie-poster"
+          />
+          <p>{movie.overview}</p>
+          <h3>Release Date: {movie.release_date}</h3>
+          <h3>Rating: {movie.vote_average}</h3>
+        </>
+      )}
+      {trailer && trailer.key && (
+        <div className="trailer">
+          <h3>Watch the Trailer:</h3>
+          <iframe
+            width="100%"
+            height="400"
+            src={`https://www.youtube.com/embed/${trailer.key}`}
+            title="Movie Trailer"
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
         </div>
       )}
     </div>
   );
 };
 
-const styles = {
-  container: {
-    textAlign: 'center',
-    padding: '20px',
-  },
-  detailsContainer: {
-    padding: '20px',
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-  },
-};
-
-export default DetailView;
+export default MovieDetailsView;

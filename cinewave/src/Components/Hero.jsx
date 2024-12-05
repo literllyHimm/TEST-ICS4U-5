@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <section style={styles.hero}>
       <div style={styles.overlay}>
-        <h1>Welcome to MyMovieApp</h1>
+        <h1>Welcome to Cinewave</h1>
         <p>Discover your next favorite movie!</p>
       </div>
     </section>

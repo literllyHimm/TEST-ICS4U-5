@@ -1,65 +1,55 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import '../styles/LoginView.css';
 
 const LoginView = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Initialize the navigate function
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Login:', { email, password });
+    e.preventDefault(); // Prevent default form submission behavior
+
+    // Example validation (You can replace this with real validation)
+    if (email === 'Arjunkotwal@gmail.com' && password === 'password123') {
+      // Redirect to home page if credentials are correct
+      navigate('/');
+    } else {
+      // Optionally show an error message
+      alert('Invalid credentials, please try again.');
+    }
   };
 
   return (
-    <div style={styles.container}>
+    <div className="login-container">
       <h2>Login</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
-        />
-        <button type="submit" style={styles.button}>
-          Login
-        </button>
+      <form onSubmit={handleSubmit}>
+        <div className="input-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        <button type="submit" className="login-btn">Login</button>
       </form>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    textAlign: 'center',
-    marginTop: '50px',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-    alignItems: 'center',
-  },
-  input: {
-    padding: '10px',
-    width: '300px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
-  },
-  button: {
-    padding: '10px 20px',
-    backgroundColor: '#007BFF',
-    color: 'white',
-    border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer',
-  },
 };
 
 export default LoginView;

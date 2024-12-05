@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react';  
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import HomeView from './views/HomeView';
 import LoginView from './views/LoginView';
 import RegisterView from './views/RegisterView';
 import MoviesView from './views/MoviesView';
 import GenresPage from './views/GenresPage';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
+import DetailView from './views/DetailView'; // Import the DetailView
 
 const App = () => {
   return (
     <Router>
       <div>
-        <Header />
+        {/* Removed Header and Footer */}
+
         {/* Navigation */}
         <nav style={styles.nav}>
           <Link to="/" style={styles.navButton}>Home</Link>
@@ -27,9 +27,10 @@ const App = () => {
           <Route path="/register" element={<RegisterView />} />
           <Route path="/movies" element={<MoviesView />} />
           <Route path="/genres" element={<GenresPage />} />
+          <Route path="/movies/details/:id" element={<DetailView />} /> {/* Route for movie details */}
         </Routes>
 
-        <Footer />
+        {/* Footer removed as well */}
       </div>
     </Router>
   );

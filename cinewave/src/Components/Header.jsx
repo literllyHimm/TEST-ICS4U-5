@@ -1,38 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/Header.css';
 
 const Header = () => {
   return (
-    <header style={styles.header}>
-      <div style={styles.logo}>Cinewave</div>
-      <div>
-        <button style={styles.button}>Login</button>
-        <button style={{ ...styles.button, marginLeft: '10px' }}>Register</button>
-      </div>
+    <header className="header">
+      <h1>Cinewave</h1>
+      <nav>
+        <Link to="/" className="navLink">Home</Link>
+        <Link to="/login" className="navLink">Login</Link>
+        <Link to="/register" className="navLink">Register</Link>
+        <Link to="/genres" className="navLink">Movie List</Link>
+      </nav>
     </header>
   );
-};
-
-const styles = {
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '10px 20px',
-    backgroundColor: '#333',
-    color: 'white',
-  },
-  logo: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-  },
-  button: {
-    padding: '8px 16px',
-    backgroundColor: '#007BFF',
-    border: 'none',
-    borderRadius: '5px',
-    color: 'white',
-    cursor: 'pointer',
-  },
 };
 
 export default Header;

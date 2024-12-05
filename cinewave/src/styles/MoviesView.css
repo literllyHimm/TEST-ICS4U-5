@@ -1,0 +1,62 @@
+.movies-view {
+    display: flex;
+    margin: 20px;
+  }
+  
+  .genres-container {
+    flex: 1;  /* Left sidebar takes 1 part of the screen */
+    padding: 10px;
+    border-right: 2px solid #ddd;
+    height: 100vh; /* Full height to keep genres visible on the side */
+    overflow-y: auto;
+  }
+  
+  .genre-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .genre-card {
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .genre-card:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .movies-container {
+    flex: 3;  /* Right content area takes 3 parts of the screen */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .movies-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .movie-card {
+    text-decoration: none;
+    color: #333;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .movie-image {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .movie-card h3 {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  

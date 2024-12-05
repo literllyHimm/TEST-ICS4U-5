@@ -1,23 +1,13 @@
 import React from 'react';
+import '../styles/Footer.css';
+
 
 const Footer = () => {
   return (
-    <footer style={styles.footer}>
-      <p>&copy; 2024 MyMovieApp. All Rights Reserved.</p>
+    <footer className="footer">
+      <p>© 2024 My Movie App</p>
     </footer>
   );
-};
-
-const styles = {
-  footer: {
-    textAlign: 'center',
-    padding: '20px',
-    backgroundColor: '#333',
-    color: 'white',
-    position: 'fixed',
-    width: '100%',
-    bottom: 0,
-  },
 };
 
 export default Footer;
