@@ -14,7 +14,7 @@ const Hero = () => {
 const styles = {
   hero: {
     height: '300px',
-    backgroundImage: 'url("https://via.placeholder.com/1920x300")', // Replace with a dynamic URL if needed
+    backgroundImage: 'url("https://cdn.mos.cms.futurecdn.net/AoWXgnHSxAAPxqymPQMQYL-1200-80.jpg")', // Replace with a dynamic URL if needed
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     position: 'relative',
